@@ -1,0 +1,23 @@
+Outline
+
+Methods:
+
+  Beginning of program: Prompt user if they are buyer or seller.
+    If Buyer, input wallet and options available are
+      print catalog 
+      print catagory by price cap
+      add to shopping cart & removes item
+      delete from shopping cart
+      check out
+      search item
+      Print out wallet amount
+    If Seller,
+      print catalog
+      add item
+      remove item
+      search item
+  Catalog - Hashtable with array of catalogs and chain of items
+  Hashfunction - defined by the catagories
+  Item Structure - Name, Catagory, Price
+  Shopping Cart - Linked list
+  
