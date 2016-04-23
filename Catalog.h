@@ -1,5 +1,6 @@
 #ifndef CATALOG_H
 #define CATALOG_H
+#include <iostream>
 
 #include <vector>
 #include <iostream>
@@ -37,7 +38,7 @@ class Catalog
 	public:
 		Catalog();
 		~Catalog();
-		void readInItems();
+		void readInItems(char *filname);
 		void printCatalog();
 		void printCatalogByPriceRange(int priceRange);
 		void printCatalogByCategory(string category);
