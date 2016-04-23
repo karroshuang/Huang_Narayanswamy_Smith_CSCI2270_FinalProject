@@ -26,7 +26,7 @@ struct item{
 		name = in_name;
 		quantity = in_quantity;
 		category = in_category;
-		price = in_year;
+		price = in_price;
 		next = NULL;
 		previous = NULL;
 	}
