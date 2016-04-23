@@ -53,6 +53,7 @@ class Catalog
 		int hashSum(string x, int s);
 		int tableSize = 10;
 		item* itemCatalog[10];
+		vector<item> shoppingCart;
 
 };
 

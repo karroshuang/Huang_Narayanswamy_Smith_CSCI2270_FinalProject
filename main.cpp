@@ -5,12 +5,14 @@ TA: Amber Womack
 SID: 102359450*/
 
 #include "Catalog.h"
+#include <vector>
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
 
-    Catalog table = Catalog();
+    vector<item> shoppingCart; //shopping cart
+    Catalog table = Catalog(); //catalog declared
 
     char *filename; //initializing catalog
 

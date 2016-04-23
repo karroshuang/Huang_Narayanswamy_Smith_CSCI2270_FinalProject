@@ -1,6 +1,5 @@
 #include "Catalog.h"
 #include <iostream>
-#include <vector>
 
 Catalog::Catalog()
 {
@@ -13,6 +12,50 @@ Catalog::Catalog()
 Catalog::~Catalog()
 {
     //dtor
+}
+
+void Catalog::readInItems(char* filename)
+{
+    string data; //used for string stream
+    ifstream itemList; //text file stream
+
+    itemList.open(filename);
+
+
+    //CHECKS IF FILE OPENED CORRECTLY
+    if(itemList.bad()) {
+        itemList.close();
+        cout<<"File could not be opened"<<endl;
+        return;
+    }
+
+    while(getline(itemList, data)) {
+
+        string in_category;
+        string in_name;
+        int in_price;
+        int in_quantity;
+
+        stringstream ss(data); //create a string stream variable from the string data
+        string temp_data;
+
+        getline(ss,temp_data,','); //getting category
+        in_category = temp_data;
+
+
+        getline(ss,temp_data,','); //getting name
+        in_name = temp_data;
+
+
+        getline(ss,temp_data,','); //getting price
+        in_price = atoi(temp_data.c_str()); //converting price to int
+
+
+        getline(ss,temp_data,','); //getting quantity
+        in_quantity = atoi(temp_data.c_str()); //converting quant to int
+
+        //insertItem(in_category,in_name,in_price,in_quantity);
+    }
 }
 
 void Catalog::printCatalog()
@@ -80,46 +123,7 @@ void Catalog::printCatalogByPriceRange(int priceRange)
     }
 }
 
-void Catalog::readInItems(char* filename)
-{
-    string data; //used for string stream
-    ifstream itemList; //text file stream
-
-    itemList.open(filename);
+void addToCart(string category, string name) {
 
 
-    //CHECKS IF FILE OPENED CORRECTLY
-    if(itemList.bad()) {
-        itemList.close();
-        cout<<"File could not be opened"<<endl;
-        return;
-    }
-
-    while(getline(itemList, data)) {
-
-        string in_category;
-        string in_name;
-        int in_price;
-        int in_quantity;
-
-        stringstream ss(data); //create a string stream variable from the string data
-        string temp_data;
-
-        getline(ss,temp_data,','); //getting category
-        in_category = temp_data;
-
-
-        getline(ss,temp_data,','); //getting name
-        in_name = temp_data;
-
-
-        getline(ss,temp_data,','); //getting price
-        in_price = atoi(temp_data.c_str()); //converting price to int
-
-
-        getline(ss,temp_data,','); //getting quantity
-        in_quantity = atoi(temp_data.c_str()); //converting quant to int
-
-        //insertItem(in_category,in_name,in_price,in_quantity);
-    }
 }
