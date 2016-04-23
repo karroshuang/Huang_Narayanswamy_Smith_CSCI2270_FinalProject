@@ -14,22 +14,14 @@ using namespace std;
 
 struct item{
 	string name;
-<<<<<<< HEAD
 	string category;
-=======
-	string category
->>>>>>> 4a5fe8494e7fa258787f046416f5f3396746dc97
 	int price;
 	int quantity;
 	item *next;
     item *previous;
 
 	item(){};
-<<<<<<< HEAD
-	item(string in_category, string in_name, int in_price)
-=======
 	item(string in_category, string in_name, int in_price, int in_quantity)
->>>>>>> 4a5fe8494e7fa258787f046416f5f3396746dc97
 	{
 		name = in_name;
 		quantity = in_quantity;
