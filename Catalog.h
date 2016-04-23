@@ -1,19 +1,29 @@
 #ifndef CATALOG_H
 #define CATALOG_H
 
+#include<vector>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdlib.h>
+#include <queue>
+#include <stack>
+
 using namespace std;
 
 struct item{
-	std::string name;
-	std::string category
+	string name;
+	string category
 	int price;
+	int quantity;
 	item *next;
     item *previous;
 
 	item(){};
-	item(std::string in_category, std::string in_name, int in_price,)
+	item(string in_category, string in_name, int in_price, int in_quantity)
 	{
-		name = in_title;
+		name = in_name;
+		quantity = in_quantity;
 		category = in_category;
 		price = in_year;
 		next = NULL;
@@ -27,17 +37,19 @@ class Catalog
 	public:
 		Catalog();
 		~Catalog();
+		void readInItems();
 		void printCatalog();
 		void printCatalogByPriceRange(int priceRange);
+		void printCatalogByCategory(string category);
 		void printCategories();
-		void insertItem(std::string name, int year);
-		void deleteItem(std::string name);
-		void findItem(std::string name);
+		void insertItem(string name, int year);
+		void deleteItem(string name);
+		void findItem(string name);
 		void printShoppingCart();
 		void checkOut();
 
 	private:
-		int hashSum(std::string x, int s);
+		int hashSum(string x, int s);
 		int tableSize = 10;
 		item* itemCatalog[10];
 
