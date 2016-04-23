@@ -1,7 +1,7 @@
 #ifndef CATALOG_H
 #define CATALOG_H
 
-#include<vector>
+#include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -13,7 +13,7 @@ using namespace std;
 
 struct item{
 	string name;
-	string category
+	string category;
 	int price;
 	int quantity;
 	item *next;
@@ -25,7 +25,7 @@ struct item{
 		name = in_name;
 		quantity = in_quantity;
 		category = in_category;
-		price = in_year;
+		price = in_price;
 		next = NULL;
 		previous = NULL;
 	}
@@ -42,14 +42,14 @@ class Catalog
 		void printCatalogByPriceRange(int priceRange);
 		void printCatalogByCategory(string category);
 		void printCategories();
-		void insertItem(string name, int year);
-		void deleteItem(string name);
-		void findItem(string name);
+		void insertItem(string category, string name, int quantity, int price);
+		void deleteItem(string name, string category);
+		void findItem(string name, string category);
 		void printShoppingCart();
 		void checkOut();
 
 	private:
-		int hashSum(string x, int s);
+		int hashSum(string x);
 		int tableSize = 10;
 		item* itemCatalog[10];
 
