@@ -1,17 +1,18 @@
 #ifndef CATALOG_H
 #define CATALOG_H
+#include <iostream>
 
 using namespace std;
 
 struct item{
-	std::string name;
-	std::string category
+	string name;
+	string category;
 	int price;
 	item *next;
     item *previous;
 
 	item(){};
-	item(std::string in_category, std::string in_name, int in_price,)
+	item(string in_category, string in_name, int in_price)
 	{
 		name = in_title;
 		category = in_category;
@@ -30,9 +31,9 @@ class Catalog
 		void printCatalog();
 		void printCatalogByPriceRange(int priceRange);
 		void printCategories();
-		void insertItem(std::string name, int year);
-		void deleteItem(std::string name);
-		void findItem(std::string name);
+		void insertItem(string name, int year);
+		void deleteItem(string name);
+		void findItem(string name);
 		void printShoppingCart();
 		void checkOut();
 
