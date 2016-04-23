@@ -1,0 +1,24 @@
+Sports,Basketball,14
+Sports,Football,10
+Men's Clothing,3 Piece Suit,700
+Men's Clothing,Watch,500
+Women's Clothing,Sun Dress,80
+Women's Clothing,High Heels,70
+Electronics,Xbox One,450
+Electronics,MacBook Pro,2000
+Electronics,Samsung Galaxy S7,700
+Food,Chicken,5
+Food,Beef,8
+Food,Candy,3
+Movies,Shawshank Redemption,7
+Movies,The Godfather,7
+Games,World of Warcraft,20
+Games,Hello Kitty: Island Adventure,60
+Books,50 Shades of Gandalf the Grey,15
+Books,Harry Potter: Complete Series,50
+Books,Lord of the Rings: Complete Trilogy,30
+Arts and Crafts,Scissors,5
+Arts and Crafts,Bachelor's Degree,0
+Health and Beauty,Shampoo,$5
+Health and Beauty,Soap,$3
+Health and Beauty,Kim Kardashian's Ultimate Makeup Starter Kit,500
