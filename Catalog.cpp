@@ -118,7 +118,7 @@ void printCategories()
 {
     for(int x=0; x < tableSize; x++)
     {
-        cout<<itemCatelog[x]->category<<end;
+        cout<<itemCatelog[x]->category<<endl;
     }
 }
 void Catalog::readInItems(char* filename)
