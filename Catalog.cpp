@@ -13,11 +13,12 @@ Catalog::~Catalog()
 }
 void Catalog::printCatalog()
 {
-    item *temp = itemCatalog[x];
     int counter=0;
+    item *temp = new item;
     for(int x = 0; x < tableSize; x++)
     {
-        while(temp.next != NULL)
+        temp = itemCatalog[x];
+        while(temp->next != NULL)
         {
             counter++;
             temp = temp->next;
@@ -32,12 +33,43 @@ void Catalog::printCatalog()
         for(int x = 0; x < tableSize; x++)
         {
             temp = itemCatalog[x];
-            cout<<"Category"<<": "<<temp.category<<endl;
+            cout<<"Category"<<": "<<temp->category<<endl;
             while(temp->next != NULL)
             {
-                cout<<"Item:"<<temp.name<<", "<<"Price:"<<temp.price<<endl;
+                cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<", "<<"Quantity:"<<temp->quantity<endl;
             }
         }
     }
 }
 
+void Catalog::printCatalogByPriceRange(int priceRange)
+{
+        int counter=0;
+    item *temp = new item;
+    for(int x = 0; x < tableSize; x++)
+    {
+        temp = itemCatalog[x];
+        while(temp->next != NULL)
+        {
+            counter++;
+            temp = temp->next;
+        }
+    }
+    if(counter == 0)
+    {
+        cout<<"Catalog Empty"<<endl;
+    }
+    else
+    {
+        for(int x = 0; x < tableSize; x++)
+        {
+            temp = itemCatalog[x];
+            cout<<"Category"<<": "<<temp->category<<endl;
+            while(temp->next != NULL)
+            {
+                if()
+                cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<", "<<"Quantity:"<<temp->quantity<endl;
+            }
+        }
+    }
+}
