@@ -2,7 +2,7 @@
 #define CATALOG_H
 #include <iostream>
 
-#include<vector>
+#include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -43,16 +43,16 @@ class Catalog
 		void printCatalogByPriceRange(int priceRange);
 		void printCatalogByCategory(string category);
 		void printCategories();
-		void insertItem(string name, int year);
-		void deleteItem(string name);
-		void findItem(string name);
+		void insertItem(string category, string name, int quantity, int price);
+		void deleteItem(string name, string category);
+		void findItem(string name, string category);
 		void printShoppingCart();
 		void addToCart(string category, string name);
 		void removeFromCart(string category, string name);
 		void checkOut();
 
 	private:
-		int hashSum(string x, int s);
+		int hashSum(string x);
 		int tableSize = 10;
 		item* itemCatalog[10];
 
