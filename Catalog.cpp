@@ -114,10 +114,12 @@ void Catalog::printCatalogByCategory(string category)
     }
 }
 
-
 void printCategories()
 {
-
+    for(int x=0; x < tableSize; x++)
+    {
+        cout<<itemCatelog[x]->category<<end;
+    }
 }
 void Catalog::readInItems(char* filename)
 {
@@ -162,3 +164,6 @@ void Catalog::readInItems(char* filename)
         //insertItem(in_category,in_name,in_price,in_quantity);
     }
 }
+
+
+
