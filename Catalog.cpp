@@ -67,8 +67,10 @@ void Catalog::printCatalogByPriceRange(int priceRange)
             cout<<"Category"<<": "<<temp->category<<endl;
             while(temp->next != NULL)
             {
-                if()
-                cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<", "<<"Quantity:"<<temp->quantity<endl;
+                if(temp->price < priceRange)
+                {
+                    cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<", "<<"Quantity:"<<temp->quantity<endl;
+                }
             }
         }
     }
