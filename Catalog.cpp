@@ -341,6 +341,7 @@ void Catalog::printCategories()
         cout<<itemCatalog[x]->category<<endl;
     }
 }
+
 void Catalog::readInItems(char* filename)
 {
     string data; //used for string stream
