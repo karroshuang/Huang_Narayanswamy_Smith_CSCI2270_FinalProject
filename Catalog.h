@@ -38,7 +38,7 @@ class Catalog
 	public:
 		Catalog();
 		~Catalog();
-		void readInItems();
+		void readInItems(char *filename);
 		void printCatalog();
 		void printCatalogByPriceRange(int priceRange);
 		void printCatalogByCategory(string category);
@@ -47,6 +47,8 @@ class Catalog
 		void deleteItem(string name);
 		void findItem(string name);
 		void printShoppingCart();
+		void addToCart(string category, string name);
+		void removeFromCart(string category, string name);
 		void checkOut();
 
 	private:
