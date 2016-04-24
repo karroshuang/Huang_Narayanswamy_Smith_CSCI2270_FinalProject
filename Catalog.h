@@ -16,15 +16,13 @@ struct item{
 	string name;
 	string category;
 	int price;
-	int quantity;
 	item *next;
     item *previous;
 
 	item(){};
-	item(string in_category, string in_name, int in_price, int in_quantity)
+	item(string in_category, string in_name, int in_price)
 	{
 		name = in_name;
-		quantity = in_quantity;
 		category = in_category;
 		price = in_price;
 		next = NULL;
@@ -38,25 +36,23 @@ class Catalog
 	public:
 		Catalog();
 		~Catalog();
-		void readInItems(char *filename);
+		void readInItems(char *filname);
 		void printCatalog();
 		void printCatalogByPriceRange(int priceRange);
 		void printCatalogByCategory(string category);
 		void printCategories();
-		void insertItem(string category, string name, int quantity, int price);
+		void insertItem(string category, string name, int price);
 		void deleteItem(string name, string category);
 		void findItem(string name, string category);
 		void printShoppingCart();
 		void addToCart(string category, string name);
 		void removeFromCart(string category, string name);
-		void checkOut();
-
+		int checkOut(int budget);
 	private:
 		int hashSum(string x);
 		int tableSize = 10;
 		item* itemCatalog[10];
-		vector<item> shoppingCart;
-
+        vector<item*> shoppingCart;
 };
 
 #endif // CATALOG_H

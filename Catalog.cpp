@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 Catalog::Catalog()
 {
     for(int i = 0; i < 10; i++){
@@ -14,50 +13,6 @@ Catalog::Catalog()
 Catalog::~Catalog()
 {
     //dtor
-}
-
-void Catalog::readInItems(char* filename)
-{
-    string data; //used for string stream
-    ifstream itemList; //text file stream
-
-    itemList.open(filename);
-
-
-    //CHECKS IF FILE OPENED CORRECTLY
-    if(itemList.bad()) {
-        itemList.close();
-        cout<<"File could not be opened"<<endl;
-        return;
-    }
-
-    while(getline(itemList, data)) {
-
-        string in_category;
-        string in_name;
-        int in_price;
-        int in_quantity;
-
-        stringstream ss(data); //create a string stream variable from the string data
-        string temp_data;
-
-        getline(ss,temp_data,','); //getting category
-        in_category = temp_data;
-
-
-        getline(ss,temp_data,','); //getting name
-        in_name = temp_data;
-
-
-        getline(ss,temp_data,','); //getting price
-        in_price = atoi(temp_data.c_str()); //converting price to int
-
-
-        getline(ss,temp_data,','); //getting quantity
-        in_quantity = atoi(temp_data.c_str()); //converting quant to int
-
-        //insertItem(in_category,in_name,in_price,in_quantity);
-    }
 }
 
 void Catalog::printCatalog()
@@ -85,7 +40,7 @@ void Catalog::printCatalog()
             cout<<"Category"<<": "<<temp->category<<endl;
             while(temp->next != NULL)
             {
-                cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<", "<<"Quantity:"<<temp->quantity<<endl;
+                cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
             }
         }
     }
@@ -118,79 +73,11 @@ void Catalog::printCatalogByPriceRange(int priceRange)
             {
                 if(temp->price < priceRange)
                 {
-                    cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<", "<<"Quantity:"<<temp->quantity<<endl;
+                    cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
                 }
             }
         }
     }
-}
-
-void addToCart(string category, string name) {
-
-    int index = hashSum(category);//Acquiring index
-
-    if(index == -1){ //User put in an invalid category
-        cout<<"Invalid Category"<<endl;
-        return;
-    }
-
-    if(itemCatalog[index] != NULL){
-
-        item *tmp = itemCatalog[index];
-
-        while(tmp != NULL){
-
-            if(tmp->name == name){
-                cout <<tmp->name<<" added to shopping cart"<<endl;
-                shoppingCart.push_back(tmp);
-                deleteItem(name,category);
-                return;
-            }
-
-            else{
-                tmp = tmp->next;
-            }
-        }
-    }
-
-    cout << "Item not found" << endl;
-
-}
-
-void removeFromCart(string name) {
-
-    for(int i = 0; i < shoppingCart.size(); i++){
-
-        if(shoppingCart[i]->name == name){
-            insertItem(shoppingCart[i]->category,shoppingCart[i]->name, shoppingCart[i]->price)
-            shoppingCart[i].erase;
-            return;
-        }
-
-    }
-
-    cout << "Item not found in shopping cart" << endl;
-
-}
-
-int checkOut(int budget) {
-    for(int i = 0; i < shoppingCart.size(); i++){
-        budget = budget - shoppingCart[i]->price;
-        if(budget < 0){
-            budget = budget + shoppingCart[i]->price;
-            cout<<"insufficient funds to purchase "<<shoppingCart[i]->name<<endl;
-            cout<<"you are being sent back to the buyer's menu"<<endl;
-            return budget;
-        }
-
-        else{
-            cout<<"Purchasing "<<shoppingCart[i]->price<<endl;
-            shoppingCart[i].erase;
-        }
-
-    }
-    return budget;
-
 }
 
 void Catalog::printCatalogByCategory(string category)
@@ -220,7 +107,7 @@ void Catalog::printCatalogByCategory(string category)
                 cout<<"Category"<<": "<<temp->category<<endl;
                 while(temp->next != NULL)
                 {
-                        cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<", "<<"Quantity:"<<temp->quantity<<endl;
+                        cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
                 }
             }
         }
@@ -230,11 +117,7 @@ void Catalog::printCatalogByCategory(string category)
 
 void Catalog::insertItem(string category, string name, int price)
 {
-    item* Item = new item(category, name, price, quantity); //Create instance of item
-    if(Item->quantity < 1){ //User put in an incorrect quantity
-        cout<<"Quantity must be greater than or equal to 1"<<endl;
-        return;
-    }
+    item* Item = new item(category, name, price); //Create instance of item
     int index = hashSum(Item->category); //getting array index
     if(index == -1){ //User put in an invalid category
         cout<<"Invalid Category"<<endl;
@@ -273,36 +156,29 @@ void Catalog::deleteItem(string name, string category)
         item* tmp = itemCatalog[index];
         while(tmp != NULL){
             if(tmp->name == name){ //item has been found
-                    /*Deleting Item*/
-                    if(tmp->quantity > 1){ //if quantity is greater than 1, then reduce item quantity  by 1
-                        bool found = true;
-                        tmp->quantity--;
-                        return;
-                    }
-                    else{ //if item quantity is 1, then remove the item from hash table
-                        bool found = true;
-                        if(tmp->previous == NULL && tmp->next == NULL){ //if movie is the first and only thing in the array
-                            itemCatalog[index] = NULL;
-                            return;
-                        }
-                        else if(tmp->previous == NULL && tmp->next != NULL){ //if first thing in chain
-                            itemCatalog[index] = tmp->next;
-                            itemCatalog[index]->previous = NULL;
-                            delete tmp;
-                            return;
-                        }
-                        else if(tmp->previous != NULL && tmp->next == NULL){ //last element in the chain
-                            tmp->previous->next = NULL;
-                            delete tmp;
-                            return;
-                        }
-                        else{ //element in middle of chain
-                            tmp -> previous -> next = tmp -> next;
-                            tmp -> next -> previous = tmp -> previous;
-                            delete tmp;
-                            return;
-                        }
-                    }
+                /*Deleting Item*/
+                bool found = true;
+                if(tmp->previous == NULL && tmp->next == NULL){ //if movie is the first and only thing in the array
+                    itemCatalog[index] = NULL;
+                    return;
+                }
+                else if(tmp->previous == NULL && tmp->next != NULL){ //if first thing in chain
+                    itemCatalog[index] = tmp->next;
+                    itemCatalog[index]->previous = NULL;
+                    delete tmp;
+                    return;
+                }
+                else if(tmp->previous != NULL && tmp->next == NULL){ //last element in the chain
+                    tmp->previous->next = NULL;
+                    delete tmp;
+                    return;
+                }
+                else{ //element in middle of chain
+                    tmp -> previous -> next = tmp -> next;
+                    tmp -> next -> previous = tmp -> previous;
+                    delete tmp;
+                    return;
+                }
             }
             tmp = tmp->next;
         }
@@ -323,7 +199,7 @@ void Catalog::findItem(string name, string category)
         item *tmp = itemCatalog[index];
         while(tmp != NULL){
             if(tmp->name == name){
-                cout << tmp->category << ":" << tmp->name << ":" << tmp->price << ":" << tmp->quantity<<endl;
+                cout << "Item"<< tmp->name << ":" << "Category"<< tmp->category << ":" << "Price"<<tmp->price<<endl;
                 return;
             }
             else{
@@ -405,5 +281,91 @@ void Catalog::readInItems(char* filename)
 
         stringstream ss(data); //create a string stream variable from the string data
         string temp_data;
+
+        getline(ss,temp_data,','); //getting category
+        in_category = temp_data;
+
+
+        getline(ss,temp_data,','); //getting name
+        in_name = temp_data;
+
+
+        getline(ss,temp_data,','); //getting price
+        in_price = atoi(temp_data.c_str()); //converting price to int
+
+        insertItem(in_category,in_name,in_price);
+    }
+}
+void Catalog::addToCart(string category, string name)
+{
+    int index = hashSum(category);//Acquiring index
+
+    if(index == -1){ //User put in an invalid category
+        cout<<"Invalid Category"<<endl;
+        return;
+    }
+
+    if(itemCatalog[index] != NULL){
+
+        item *tmp = itemCatalog[index];
+
+        while(tmp != NULL){
+
+            if(tmp->name == name){
+                cout <<tmp->name<<" added to shopping cart"<<endl;
+                shoppingCart.push_back(tmp);
+                deleteItem(name,category);
+                return;
+            }
+
+            else{
+                tmp = tmp->next;
+            }
+        }
+    }
+
+    cout << "Item not found" << endl;
 }
 
+void Catalog::removeFromCart(string category, string name)
+{
+    for(int i = 0; i < shoppingCart.size(); i++){
+
+        if(shoppingCart[i]->name == name){
+            insertItem(shoppingCart[i]->category,shoppingCart[i]->name, shoppingCart[i]->price);
+            shoppingCart.erase(shoppingCart.begin()+i);
+            return;
+        }
+
+    }
+
+    cout << "Item not found in shopping cart" << endl;
+}
+
+int Catalog::checkOut(int budget)
+{
+    for(int i = 0; i < shoppingCart.size(); i++){
+        budget = budget - shoppingCart[i]->price;
+        if(budget < 0){
+            budget = budget + shoppingCart[i]->price;
+            cout<<"insufficient funds to purchase "<<shoppingCart[i]->name<<endl;
+            cout<<"you are being sent back to the buyer's menu"<<endl;
+            return budget;
+        }
+
+        else{
+            cout<<"Purchasing "<<shoppingCart[i]->price<<endl;
+            shoppingCart.erase(shoppingCart.begin()+i);
+        }
+
+    }
+    return budget;
+}
+
+void Catalog::printShoppingCart()
+{
+    for(int x = 0; x < shoppingCart.size();x++)
+    {
+        cout<<"Item: "<<shoppingCart[x]->name<<"Price: "<<shoppingCart[x]->price<<endl;
+    }
+}
