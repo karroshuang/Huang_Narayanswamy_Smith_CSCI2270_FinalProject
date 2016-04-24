@@ -125,32 +125,71 @@ void Catalog::printCatalogByPriceRange(int priceRange)
     }
 }
 
-
 void addToCart(string category, string name) {
+
     int index = hashSum(category);//Acquiring index
+
     if(index == -1){ //User put in an invalid category
         cout<<"Invalid Category"<<endl;
         return;
     }
+
     if(itemCatalog[index] != NULL){
+
         item *tmp = itemCatalog[index];
+
         while(tmp != NULL){
+
             if(tmp->name == name){
                 cout <<tmp->name<<" added to shopping cart"<<endl;
                 shoppingCart.push_back(tmp);
-                Catalog::deleteItem(name,category);
+                deleteItem(name,category);
                 return;
             }
+
             else{
-            tmp = tmp->next;
+                tmp = tmp->next;
             }
         }
     }
-    cout << "item not found" << endl;
-    return;
+
+    cout << "Item not found" << endl;
+
 }
 
-void removeFromCart(string category, string name) {
+void removeFromCart(string name) {
+
+    for(int i = 0; i < shoppingCart.size(); i++){
+
+        if(shoppingCart[i]->name == name){
+            insertItem(shoppingCart[i]->category,shoppingCart[i]->name, shoppingCart[i]->price)
+            shoppingCart[i].erase;
+            return;
+        }
+
+    }
+
+    cout << "Item not found in shopping cart" << endl;
+
+}
+
+int checkOut(int budget) {
+    for(int i = 0; i < shoppingCart.size(); i++){
+        budget = budget - shoppingCart[i]->price;
+        if(budget < 0){
+            budget = budget + shoppingCart[i]->price;
+            cout<<"insufficient funds to purchase "<<shoppingCart[i]->name<<endl;
+            cout<<"you are being sent back to the buyer's menu"<<endl;
+            return budget;
+        }
+
+        else{
+            cout<<"Purchasing "<<shoppingCart[i]->price<<endl;
+            shoppingCart[i].erase;
+        }
+
+    }
+    return budget;
 
 }
 
@@ -189,7 +228,7 @@ void Catalog::printCatalogByCategory(string category)
 
 }
 
-void Catalog::insertItem(string category, string name, int quantity, int price)
+void Catalog::insertItem(string category, string name, int price)
 {
     item* Item = new item(category, name, price, quantity); //Create instance of item
     if(Item->quantity < 1){ //User put in an incorrect quantity
