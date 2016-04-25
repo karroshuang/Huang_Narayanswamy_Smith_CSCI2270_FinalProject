@@ -37,10 +37,12 @@ void Catalog::printCatalog()
         for(int x = 0; x < tableSize; x++)
         {
             temp = itemCatalog[x];
+            cout<<endl;
             cout<<"Category"<<": "<<temp->category<<endl;
             while(temp->next != NULL)
             {
                 cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
+                temp = temp->next;
             }
         }
     }
@@ -68,12 +70,14 @@ void Catalog::printCatalogByPriceRange(int priceRange)
         for(int x = 0; x < tableSize; x++)
         {
             temp = itemCatalog[x];
+            cout<<endl;
             cout<<"Category"<<": "<<temp->category<<endl;
             while(temp->next != NULL)
             {
                 if(temp->price < priceRange)
                 {
                     cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
+                    temp = temp->next;
                 }
             }
         }
@@ -104,10 +108,12 @@ void Catalog::printCatalogByCategory(string category)
             temp = itemCatalog[x];
             if(temp->category == category)
             {
+                cout<<endl;
                 cout<<"Category"<<": "<<temp->category<<endl;
                 while(temp->next != NULL)
                 {
                         cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
+                        temp =temp->next;
                 }
             }
         }
