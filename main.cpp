@@ -94,15 +94,15 @@ int main(int argc, char* argv[]) {
                 table.printCatalog();
             }
 
-            else if (numchoice2 == 2) { //Print Catalog by Budget
+            if (numchoice2 == 2) { //Print Catalog by Budget
                 table.printCatalogByPriceRange(wallet);
             }
 
-            else if (numchoice2 == 3) { //Print Catagories
+            if (numchoice2 == 3) { //Print Catagories
                 table.printCategories();
             }
 
-            else if (numchoice2 == 4) { //Add Item to shopping cart
+            if (numchoice2 == 4) { //Add Item to shopping cart
                 cout<<"Insert Item Name."<<endl;
                 getline(cin, itemName);
                 cout<<"Insert Item Category."<<endl;
@@ -110,7 +110,7 @@ int main(int argc, char* argv[]) {
                 table.addToCart(itemcategory, itemName);
             }
 
-            else if (numchoice2 == 5) { //Remove Item from Shopping Cart
+            if (numchoice2 == 5) { //Remove Item from Shopping Cart
                 cout<<"Insert Item Name."<<endl;
                 getline(cin, itemName);
                 cout<<"Insert Item Category."<<endl;
@@ -118,19 +118,19 @@ int main(int argc, char* argv[]) {
                 table.removeFromCart(itemcategory, itemName);
             }
 
-            else if (numchoice2 == 6) { //Print Shopping Cart
+            if (numchoice2 == 6) { //Print Shopping Cart
                 table.printShoppingCart();
             }
 
-            else if (numchoice2 == 7) { //quit
+            if (numchoice2 == 7) {
                 wallet = table.checkOut(wallet);
             }
 
-            else if(numchoice2 == 8){
+            if(numchoice2 == 8){ //quit
                 break;
             }
 
-            else { //not correct input
+            else{ //not correct input
                 cout<<"Not valid input"<<endl;
             }
         }
@@ -197,4 +197,5 @@ int main(int argc, char* argv[]) {
     return 0;
 
 }
+
 
