@@ -4,7 +4,7 @@ Prof. Rhonda Hoenigman
 TA: Amber Womack
 SID: 102359450*/
 
-#include "Catalog.h"
+#include "catalog.h"
 
 using namespace std;
 
@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
                 getline(cin,stringwallet);
                 wallet = atoi(stringwallet.c_str());
                 if(wallet < 0 || wallet > 2147483648){
-                    cout<<"Invalid Money Input"<<endl;
+                    cout<<"Cannot Have Negative $$$ or Value Greater than $2147483648"<<endl;
                 }
                 else{
                     break;
@@ -68,23 +68,24 @@ int main(int argc, char* argv[]) {
             cout<<"Welcome seller!"<<endl;
         }
         else{
+            cout<<"Good Bye!"<<endl;
             return 0;
         }
 
         //BUYER'S MENU
-        while(numchoice2 != 8 && buyerSeller == true) { //choices 1-7
+        while(numchoice2 != 9 && buyerSeller == true) { //choices 1-7
 
             cout<<"======Buyer's Main Menu======"<<endl;
             cout<<"Current Wallet: $"<<wallet<<endl;
             cout<<"1. Print catalog"<<endl;
             cout<<"2. Print catalog by budget"<<endl;
             cout<<"3. Print categories"<<endl;
-            cout<<"3. Search item"<<endl;
-            cout<<"4. Add item to shopping cart"<<endl;
-            cout<<"5. Remove item from shopping cart"<<endl;
-            cout<<"6. Print shopping cart"<<endl;
-            cout<<"7. Check out"<<endl;
-            cout<<"8. Quit"<<endl;
+            cout<<"4. Search item"<<endl;
+            cout<<"5. Add item to shopping cart"<<endl;
+            cout<<"6. Remove item from shopping cart"<<endl;
+            cout<<"7. Print shopping cart"<<endl;
+            cout<<"8. Check out"<<endl;
+            cout<<"9. Quit"<<endl;
 
             getline(cin, choice); //getting choice
             numchoice2 = atoi(choice.c_str()); //converting to int from string
@@ -94,39 +95,46 @@ int main(int argc, char* argv[]) {
                 table.printCatalog();
             }
 
-            if (numchoice2 == 2) { //Print Catalog by Budget
+            else if (numchoice2 == 2) { //Print Catalog by Budget
                 table.printCatalogByPriceRange(wallet);
             }
 
-            if (numchoice2 == 3) { //Print Catagories
+            else if (numchoice2 == 3) { //Print Categories
                 table.printCategories();
             }
 
-            if (numchoice2 == 4) { //Add Item to shopping cart
-                cout<<"Insert Item Name."<<endl;
+            else if(numchoice2 == 4) {//search for item
+                cout<<"Search Item Name."<<endl;
+                getline(cin, itemName);
+                cout<<"Search Item Category."<<endl;
+                getline(cin, itemcategory);
+                table.findItem(itemName, itemcategory);
+            }
+            else if (numchoice2 == 5) { //Add Item to shopping cart
+                cout<<"Insert Item Name to be Added to Shopping Cart"<<endl;
                 getline(cin, itemName);
                 cout<<"Insert Item Category."<<endl;
                 getline(cin, itemcategory);
                 table.addToCart(itemcategory, itemName);
             }
 
-            if (numchoice2 == 5) { //Remove Item from Shopping Cart
-                cout<<"Insert Item Name."<<endl;
+            else if (numchoice2 == 6) { //Remove Item from Shopping Cart
+                cout<<"Insert Item Name to be Removed From Shopping Cart"<<endl;
                 getline(cin, itemName);
                 cout<<"Insert Item Category."<<endl;
                 getline(cin, itemcategory);
                 table.removeFromCart(itemcategory, itemName);
             }
 
-            if (numchoice2 == 6) { //Print Shopping Cart
+            else if (numchoice2 == 7) { //Print Shopping Cart
                 table.printShoppingCart();
             }
 
-            if (numchoice2 == 7) {
+            else if (numchoice2 == 8) {//Checkout
                 wallet = table.checkOut(wallet);
             }
 
-            if(numchoice2 == 8){ //quit
+            else if(numchoice2 == 9){ //quit
                 break;
             }
 
@@ -193,7 +201,7 @@ int main(int argc, char* argv[]) {
         numchoice1 = 0;
 
     }
-
+    cout<<"Good Bye!"<<endl;
     return 0;
 
 }

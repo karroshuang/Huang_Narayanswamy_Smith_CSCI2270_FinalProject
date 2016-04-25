@@ -1,4 +1,4 @@
-#include "Catalog.h"
+#include "catalog.h"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ void Catalog::printCatalog()
     for(int x = 0; x < tableSize; x++)
     {
         temp = itemCatalog[x];
-        while(temp->next != NULL)
+        while(temp != NULL)
         {
             counter++;
             temp = temp->next;
@@ -39,7 +39,7 @@ void Catalog::printCatalog()
             temp = itemCatalog[x];
             cout<<endl;
             cout<<"Category"<<": "<<temp->category<<endl;
-            while(temp->next != NULL)
+            while(temp != NULL)
             {
                 cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
                 temp = temp->next;
@@ -55,7 +55,7 @@ void Catalog::printCatalogByPriceRange(int priceRange)
     for(int x = 0; x < tableSize; x++)
     {
         temp = itemCatalog[x];
-        while(temp->next != NULL)
+        while(temp != NULL)
         {
             counter++;
             temp = temp->next;
@@ -72,7 +72,7 @@ void Catalog::printCatalogByPriceRange(int priceRange)
             temp = itemCatalog[x];
             cout<<endl;
             cout<<"Category"<<": "<<temp->category<<endl;
-            while(temp->next != NULL)
+            while(temp != NULL)
             {
                 if(temp->price < priceRange)
                 {
@@ -82,6 +82,7 @@ void Catalog::printCatalogByPriceRange(int priceRange)
             }
         }
     }
+    return;
 }
 
 void Catalog::printCatalogByCategory(string category)
@@ -91,7 +92,7 @@ void Catalog::printCatalogByCategory(string category)
     for(int x = 0; x < tableSize; x++)
     {
         temp = itemCatalog[x];
-        while(temp->next != NULL)
+        while(temp != NULL)
         {
             counter++;
             temp = temp->next;
@@ -110,7 +111,7 @@ void Catalog::printCatalogByCategory(string category)
             {
                 cout<<endl;
                 cout<<"Category"<<": "<<temp->category<<endl;
-                while(temp->next != NULL)
+                while(temp != NULL)
                 {
                         cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
                         temp =temp->next;
@@ -171,18 +172,18 @@ void Catalog::deleteItem(string name, string category)
                 else if(tmp->previous == NULL && tmp->next != NULL){ //if first thing in chain
                     itemCatalog[index] = tmp->next;
                     itemCatalog[index]->previous = NULL;
-                    delete tmp;
+                    //delete tmp;
                     return;
                 }
                 else if(tmp->previous != NULL && tmp->next == NULL){ //last element in the chain
                     tmp->previous->next = NULL;
-                    delete tmp;
+                    //delete tmp;
                     return;
                 }
                 else{ //element in middle of chain
                     tmp -> previous -> next = tmp -> next;
                     tmp -> next -> previous = tmp -> previous;
-                    delete tmp;
+                    //delete tmp;
                     return;
                 }
             }
@@ -205,7 +206,7 @@ void Catalog::findItem(string name, string category)
         item *tmp = itemCatalog[index];
         while(tmp != NULL){
             if(tmp->name == name){
-                cout << "Item"<< tmp->name << ":" << "Category"<< tmp->category << ":" << "Price"<<tmp->price<<endl;
+                cout << "Item: "<< tmp->name << ", Category: "<< tmp->category << ", Price: "<<tmp->price<<endl;
                 return;
             }
             else{
@@ -360,8 +361,9 @@ int Catalog::checkOut(int budget)
         }
 
         else{
-            cout<<"Purchasing "<<shoppingCart[i]->price<<endl;
+            cout<<"Purchasing "<<shoppingCart[i]->name<<" for: "<<shoppingCart[i]->price<<endl;
             shoppingCart.erase(shoppingCart.begin()+i);
+            delete shoppingCart[i];
         }
 
     }
@@ -372,6 +374,7 @@ void Catalog::printShoppingCart()
 {
     for(int x = 0; x < shoppingCart.size();x++)
     {
-        cout<<"Item: "<<shoppingCart[x]->name<<"Price: "<<shoppingCart[x]->price<<endl;
+        cout<<"Item: "<<shoppingCart[x]->name<<", Price: "<<shoppingCart[x]->price<<endl;
+
     }
 }
