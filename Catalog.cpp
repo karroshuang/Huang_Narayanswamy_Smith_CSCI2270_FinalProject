@@ -1,4 +1,4 @@
-#include "catalog.h"
+#include "Catalog.h"
 
 using namespace std;
 
@@ -19,30 +19,26 @@ void Catalog::printCatalog()
 {
     int counter=0;
     item *temp = new item;
-    for(int x = 0; x < tableSize; x++)
-    {
+    for(int x = 0; x < tableSize; x++){
         temp = itemCatalog[x];
-        while(temp != NULL)
-        {
+        while(temp != NULL){
             counter++;
             temp = temp->next;
         }
     }
-    if(counter == 0)
-    {
+    if(counter == 0){
         cout<<"Catalog Empty"<<endl;
     }
-    else
-    {
-        for(int x = 0; x < tableSize; x++)
-        {
+    else{
+        for(int x = 0; x < tableSize; x++){
             temp = itemCatalog[x];
-            cout<<endl;
-            cout<<"Category"<<": "<<temp->category<<endl;
-            while(temp != NULL)
-            {
-                cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
-                temp = temp->next;
+            if(temp != NULL){
+                cout<<endl;
+                cout<<"Category"<<": "<<temp->category<<endl;
+                while(temp != NULL){
+                    cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
+                    temp = temp->next;
+                }
             }
         }
     }
@@ -70,56 +66,25 @@ void Catalog::printCatalogByPriceRange(int priceRange)
         for(int x = 0; x < tableSize; x++)
         {
             temp = itemCatalog[x];
-            cout<<endl;
-            cout<<"Category"<<": "<<temp->category<<endl;
-            while(temp != NULL)
-            {
-                if(temp->price < priceRange)
+            if(temp != NULL){
+                cout<<endl;
+                cout<<"Category"<<": "<<temp->category<<endl;
+                while(temp != NULL)
                 {
-                    cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
+                    if(temp->price < priceRange)
+                    {
+                        cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
+                    }
+                    else{
+                        cout<<"Can't Afford Anything in this Category"<<endl;
+                        break;
+                    }
                     temp = temp->next;
                 }
             }
         }
     }
     return;
-}
-
-void Catalog::printCatalogByCategory(string category)
-{
-    int counter=0;
-    item *temp = new item;
-    for(int x = 0; x < tableSize; x++)
-    {
-        temp = itemCatalog[x];
-        while(temp != NULL)
-        {
-            counter++;
-            temp = temp->next;
-        }
-    }
-    if(counter == 0)
-    {
-        cout<<"Catalog Empty"<<endl;
-    }
-    else
-    {
-        for(int x = 0; x < tableSize; x++)
-        {
-            temp = itemCatalog[x];
-            if(temp->category == category)
-            {
-                cout<<endl;
-                cout<<"Category"<<": "<<temp->category<<endl;
-                while(temp != NULL)
-                {
-                        cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
-                        temp =temp->next;
-                }
-            }
-        }
-    }
-
 }
 
 void Catalog::insertItem(string category, string name, int price)
@@ -258,9 +223,16 @@ int Catalog::hashSum(string x)
 
 void Catalog::printCategories()
 {
+    bool emptycatalog = true;
     for(int x=0; x < tableSize; x++)
     {
-        cout<<itemCatalog[x]->category<<endl;
+        if(itemCatalog[x] != NULL){
+            emptycatalog = false;
+            cout<<itemCatalog[x]->category<<endl;
+        }
+    }
+    if(emptycatalog){
+        cout<<"Catalog is Empty"<<endl;
     }
 }
 
@@ -334,7 +306,7 @@ void Catalog::addToCart(string category, string name)
     cout << "Item not found" << endl;
 }
 
-void Catalog::removeFromCart(string category, string name)
+void Catalog::removeFromCart(string name)
 {
     for(int i = 0; i < shoppingCart.size(); i++){
 
@@ -351,19 +323,17 @@ void Catalog::removeFromCart(string category, string name)
 
 int Catalog::checkOut(int budget)
 {
-    for(int i = 0; i < shoppingCart.size(); i++){
-        budget = budget - shoppingCart[i]->price;
+    while(!shoppingCart.empty()){
+        budget = budget - shoppingCart[0]->price;
         if(budget < 0){
-            budget = budget + shoppingCart[i]->price;
-            cout<<"insufficient funds to purchase "<<shoppingCart[i]->name<<endl;
+            budget = budget + shoppingCart[0]->price;
+            cout<<"insufficient funds to purchase "<<shoppingCart[0]->name<<endl;
             cout<<"you are being sent back to the buyer's menu"<<endl;
             return budget;
         }
-
         else{
-            cout<<"Purchasing "<<shoppingCart[i]->name<<" for: "<<shoppingCart[i]->price<<endl;
-            shoppingCart.erase(shoppingCart.begin()+i);
-            delete shoppingCart[i];
+            cout<<"Purchasing "<<shoppingCart[0]->name<<" for: "<<shoppingCart[0]->price<<endl;
+            shoppingCart.erase(shoppingCart.begin());
         }
 
     }

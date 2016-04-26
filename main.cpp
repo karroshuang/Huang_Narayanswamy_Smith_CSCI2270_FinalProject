@@ -4,7 +4,7 @@ Prof. Rhonda Hoenigman
 TA: Amber Womack
 SID: 102359450*/
 
-#include "catalog.h"
+#include "Catalog.h"
 
 using namespace std;
 
@@ -121,9 +121,7 @@ int main(int argc, char* argv[]) {
             else if (numchoice2 == 6) { //Remove Item from Shopping Cart
                 cout<<"Insert Item Name to be Removed From Shopping Cart"<<endl;
                 getline(cin, itemName);
-                cout<<"Insert Item Category."<<endl;
-                getline(cin, itemcategory);
-                table.removeFromCart(itemcategory, itemName);
+                table.removeFromCart(itemName);
             }
 
             else if (numchoice2 == 7) { //Print Shopping Cart

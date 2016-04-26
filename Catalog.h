@@ -39,14 +39,13 @@ class Catalog
 		void readInItems(char *filname);
 		void printCatalog();
 		void printCatalogByPriceRange(int priceRange);
-		void printCatalogByCategory(string category);
 		void printCategories();
 		void insertItem(string category, string name, int price);
 		void deleteItem(string name, string category);
 		void findItem(string name, string category);
 		void printShoppingCart();
 		void addToCart(string category, string name);
-		void removeFromCart(string category, string name);
+		void removeFromCart(string name);
 		int checkOut(int budget);
 	private:
 		int hashSum(string x);
