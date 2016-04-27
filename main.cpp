@@ -4,7 +4,7 @@ Prof. Rhonda Hoenigman
 TA: Amber Womack
 SID: 102359450*/
 
-#include "Catalog.h"
+#include "catalog.h"
 
 using namespace std;
 
@@ -142,7 +142,7 @@ int main(int argc, char* argv[]) {
         }
 
         //SELLER'S MENU
-        while(numchoice2 != 6 && buyerSeller == false) { //choices 1-4
+        while(numchoice2 != 5 && buyerSeller == false) { //choices 1-4
 
             cout<<"======Seller's Main Menu======"<<endl;
             cout<<"1. Print catalog"<<endl;
@@ -165,7 +165,8 @@ int main(int argc, char* argv[]) {
                 cout<<"Insert Item Category."<<endl;
                 getline(cin, itemcategory);
                 cout<<"Insert Item Price."<<endl;
-                cin>>itemPrice;
+                getline(cin, itemPriceString);
+                itemPrice = atoi(itemPriceString.c_str());
                 table.insertItem(itemcategory, itemName, itemPrice);
             }
 

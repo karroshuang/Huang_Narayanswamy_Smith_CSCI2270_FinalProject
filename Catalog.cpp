@@ -1,4 +1,4 @@
-#include "Catalog.h"
+#include "catalog.h"
 
 using namespace std;
 
@@ -323,28 +323,38 @@ void Catalog::removeFromCart(string name)
 
 int Catalog::checkOut(int budget)
 {
-    while(!shoppingCart.empty()){
-        budget = budget - shoppingCart[0]->price;
-        if(budget < 0){
-            budget = budget + shoppingCart[0]->price;
-            cout<<"insufficient funds to purchase "<<shoppingCart[0]->name<<endl;
-            cout<<"you are being sent back to the buyer's menu"<<endl;
-            return budget;
-        }
-        else{
-            cout<<"Purchasing "<<shoppingCart[0]->name<<" for: "<<shoppingCart[0]->price<<endl;
-            shoppingCart.erase(shoppingCart.begin());
-        }
+    if(shoppingCart.empty()){
+        cout<<"Shopping Cart is Empty"<<endl;
+    }
+    else{
+        while(!shoppingCart.empty()){
+            budget = budget - shoppingCart[0]->price;
+            if(budget < 0){
+                budget = budget + shoppingCart[0]->price;
+                cout<<"insufficient funds to purchase "<<shoppingCart[0]->name<<endl;
+                cout<<"you are being sent back to the buyer's menu"<<endl;
+                return budget;
+            }
+            else{
+                cout<<"Purchasing "<<shoppingCart[0]->name<<" for: "<<shoppingCart[0]->price<<endl;
+                shoppingCart.erase(shoppingCart.begin());
+            }
 
+        }
     }
     return budget;
 }
 
 void Catalog::printShoppingCart()
 {
-    for(int x = 0; x < shoppingCart.size();x++)
-    {
-        cout<<"Item: "<<shoppingCart[x]->name<<", Price: "<<shoppingCart[x]->price<<endl;
+    if(shoppingCart.empty()){
+        cout<<"Shopping Cart is Empty"<<endl;
+    }
+    else{
+        for(int x = 0; x < shoppingCart.size();x++)
+        {
+            cout<<"Item: "<<shoppingCart[x]->name<<", Price: "<<shoppingCart[x]->price<<endl;
 
+        }
     }
 }
