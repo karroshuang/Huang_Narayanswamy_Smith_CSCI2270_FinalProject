@@ -12,15 +12,15 @@
 
 using namespace std;
 
-struct item{
-	string name;
+struct item{ //item struct, the struct used for every item in the catalog
+	string name; //product name
 	string category;
 	int price;
-	item *next;
+	item *next; //in hashtable linked list, next and previous items
     item *previous;
 
 	item(){};
-	item(string in_category, string in_name, int in_price)
+	item(string in_category, string in_name, int in_price) // item constructor
 	{
 		name = in_name;
 		category = in_category;
@@ -34,8 +34,8 @@ struct item{
 class Catalog
 {
 	public:
-		Catalog();
-		~Catalog();
+		Catalog(); //construct
+		~Catalog(); //destruct
 		void readInItems(char *filname);
 		void printCatalog();
 		void printCatalogByPriceRange(int priceRange);
@@ -49,9 +49,9 @@ class Catalog
 		int checkOut(int budget);
 	private:
 		int hashSum(string x);
-		int tableSize = 10;
-		item* itemCatalog[10];
-        vector<item*> shoppingCart;
+		int tableSize = 10; //set size of hashtable
+		item* itemCatalog[10]; //name of hashtable
+        vector<item*> shoppingCart; //vector where item about to be bought are stored
 };
 
 #endif // CATALOG_H
