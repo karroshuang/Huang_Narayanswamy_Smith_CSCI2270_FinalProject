@@ -4,7 +4,7 @@ Prof. Rhonda Hoenigman
 TA: Amber Womack
 SID: 102359450*/
 
-#include "catalog.h"
+#include "Catalog.h"
 
 using namespace std;
 
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 
     table.readInItems(filename); //initialize catalog with items from items.txt
 
-    while(numchoice2 != 3) {
+    while(numchoice2 != 3) {  //first choice, buyer or seller?
 
         cout<<"Are you a buyer or a seller?"<<endl;
         cout<<"1. Buyer"<<endl;
@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
 
         //BUYER'S MENU
         while(numchoice2 != 9 && buyerSeller == true) { //choices 1-7
-
+            cout<<endl;
             cout<<"======Buyer's Main Menu======"<<endl;
             cout<<"Current Wallet: $"<<wallet<<endl;
             cout<<"1. Print catalog"<<endl;
@@ -143,7 +143,7 @@ int main(int argc, char* argv[]) {
 
         //SELLER'S MENU
         while(numchoice2 != 5 && buyerSeller == false) { //choices 1-4
-
+            cout<<endl;
             cout<<"======Seller's Main Menu======"<<endl;
             cout<<"1. Print catalog"<<endl;
             cout<<"2. Add item"<<endl;

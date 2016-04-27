@@ -1,8 +1,8 @@
-#include "catalog.h"
+#include "Catalog.h"
 
 using namespace std;
 
-Catalog::Catalog()
+Catalog::Catalog() //initialize array to NULL
 {
     for(int i = 0; i < 10; i++){
         itemCatalog[i] = NULL;
@@ -15,11 +15,11 @@ Catalog::~Catalog()
     //dtor
 }
 
-void Catalog::printCatalog()
+void Catalog::printCatalog() //prints the entire catalog, first by category and then each item in the category
 {
     int counter=0;
     item *temp = new item;
-    for(int x = 0; x < tableSize; x++){
+    for(int x = 0; x < tableSize; x++){ //checks to see if the array is empty
         temp = itemCatalog[x];
         while(temp != NULL){
             counter++;
@@ -44,7 +44,7 @@ void Catalog::printCatalog()
     }
 }
 
-void Catalog::printCatalogByPriceRange(int priceRange)
+void Catalog::printCatalogByPriceRange(int priceRange) //prints the same as the printFunction but by price
 {
     int counter=0;
     item *temp = new item;
@@ -87,7 +87,7 @@ void Catalog::printCatalogByPriceRange(int priceRange)
     return;
 }
 
-void Catalog::insertItem(string category, string name, int price)
+void Catalog::insertItem(string category, string name, int price)  //used when sellers add items to the array or items are removed from cart
 {
     item* Item = new item(category, name, price); //Create instance of item
     int index = hashSum(Item->category); //getting array index
@@ -183,7 +183,7 @@ void Catalog::findItem(string name, string category)
     return;
 }
 
-int Catalog::hashSum(string x)
+int Catalog::hashSum(string x) //basic hashSum function that separates things by categories, each array index is a category
 {
     if(x == "Sports"){
         return 0;
@@ -221,7 +221,7 @@ int Catalog::hashSum(string x)
 
 }
 
-void Catalog::printCategories()
+void Catalog::printCategories() //prints the categories
 {
     bool emptycatalog = true;
     for(int x=0; x < tableSize; x++)
@@ -236,7 +236,7 @@ void Catalog::printCategories()
     }
 }
 
-void Catalog::readInItems(char* filename)
+void Catalog::readInItems(char* filename) //initial function that puts things in the array so the buyer or seller has something to wprk with
 {
     string data; //used for string stream
     ifstream itemList; //text file stream
@@ -306,7 +306,7 @@ void Catalog::addToCart(string category, string name)
     cout << "Item not found" << endl;
 }
 
-void Catalog::removeFromCart(string name)
+void Catalog::removeFromCart(string name) //removing an item from the shopping cart
 {
     for(int i = 0; i < shoppingCart.size(); i++){
 
@@ -321,7 +321,7 @@ void Catalog::removeFromCart(string name)
     cout << "Item not found in shopping cart" << endl;
 }
 
-int Catalog::checkOut(int budget)
+int Catalog::checkOut(int budget) //checks out items, item by item. If there isn't enough money the buyer is sent back with their remaining funds
 {
     if(shoppingCart.empty()){
         cout<<"Shopping Cart is Empty"<<endl;
@@ -345,7 +345,7 @@ int Catalog::checkOut(int budget)
     return budget;
 }
 
-void Catalog::printShoppingCart()
+void Catalog::printShoppingCart() //iterates through the vector that makes up the shopping cart
 {
     if(shoppingCart.empty()){
         cout<<"Shopping Cart is Empty"<<endl;
