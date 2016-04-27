@@ -5,7 +5,10 @@ This project implements an online store. The online store will use a hash table 
 
 HOW TO RUN:
 Open up the main.cpp file using the Catalog.h and Catalog.cpp files and items.txt file 
-follow the instructions on screen to buy or sell on the online catalog!
+follow the instructions on screen to buy or sell on the online catalog! The three files may have to be copied and pasted into a project. Without putting the three files (main.cpp, Catalog.cpp, Catalog.h) these is potential for the files to not link properly. 
+
+Once the program has started running, the user has to option to enter either a buyer or a seller menu. These two menus give the users different options. There are a variety of print options, that allow to print out the catalog or the shopping cart. There are also add/remove from shopping cart and checkout options for the buyer, and add and remove items from the catalog for the buyer. 
+Have fun!
 
 DEPENDENCIES:
 Code::Blocks is sufficient, nothing else needed
@@ -19,4 +22,4 @@ This project is created by Karros Huang, Girish Narayanswamy, and Chase Smith.
 CONTRIBUTORS:
 
 ISSUES/BUGS:
-None
+None that we know of
