@@ -17,7 +17,7 @@ Catalog::~Catalog()
 
 void Catalog::printCatalog() //prints the entire catalog, first by category and then each item in the category
 {
-    int counter=0;
+    int counter=0; //makes sure there are more than 0 items in catalog
     item *temp = new item;
     for(int x = 0; x < tableSize; x++){ //checks to see if the array is empty
         temp = itemCatalog[x];
@@ -27,14 +27,14 @@ void Catalog::printCatalog() //prints the entire catalog, first by category and 
         }
     }
     if(counter == 0){
-        cout<<"Catalog Empty"<<endl;
+        cout<<"Catalog Empty"<<endl; //if counter is still 0 catalog is empty
     }
     else{
-        for(int x = 0; x < tableSize; x++){
+        for(int x = 0; x < tableSize; x++){ //if not empty iterates through hash table and prints ALL items
             temp = itemCatalog[x];
             if(temp != NULL){
                 cout<<endl;
-                cout<<"Category"<<": "<<temp->category<<endl;
+                cout<<"Category"<<": "<<temp->category<<endl; //prints out the category name only once
                 while(temp != NULL){
                     cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
                     temp = temp->next;
@@ -71,12 +71,12 @@ void Catalog::printCatalogByPriceRange(int priceRange) //prints the same as the 
                 cout<<"Category"<<": "<<temp->category<<endl;
                 while(temp != NULL)
                 {
-                    if(temp->price < priceRange)
+                    if(temp->price < priceRange) //prints if under budget
                     {
                         cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
                     }
                     else{
-                        cout<<"Can't Afford Anything in this Category"<<endl;
+                        cout<<"Can't Afford Anything in this Category"<<endl; //all items are above price range
                         break;
                     }
                     temp = temp->next;
@@ -168,7 +168,7 @@ void Catalog::findItem(string name, string category)
         return;
     }
     if(itemCatalog[index] != NULL){
-        item *tmp = itemCatalog[index];
+        item *tmp = itemCatalog[index]; //makes walker to move through table to find item
         while(tmp != NULL){
             if(tmp->name == name){
                 cout << "Item: "<< tmp->name << ", Category: "<< tmp->category << ", Price: "<<tmp->price<<endl;
@@ -179,12 +179,12 @@ void Catalog::findItem(string name, string category)
             }
         }
     }
-    cout << "item not found" << endl;
+    cout << "item not found" << endl; //if does not return earlier means item was not found in catalog
     return;
 }
 
 int Catalog::hashSum(string x) //basic hashSum function that separates things by categories, each array index is a category
-{
+{//all of the different possible categories
     if(x == "Sports"){
         return 0;
     }
@@ -215,7 +215,7 @@ int Catalog::hashSum(string x) //basic hashSum function that separates things by
     else if(x == "Health and Beauty"){
         return 9;
     }
-    else{
+    else{ //else invalid input
         return -1;
     }
 
@@ -224,7 +224,7 @@ int Catalog::hashSum(string x) //basic hashSum function that separates things by
 void Catalog::printCategories() //prints the categories
 {
     bool emptycatalog = true;
-    for(int x=0; x < tableSize; x++)
+    for(int x=0; x < tableSize; x++) //iterates through the hashtable
     {
         if(itemCatalog[x] != NULL){
             emptycatalog = false;
@@ -232,7 +232,7 @@ void Catalog::printCategories() //prints the categories
         }
     }
     if(emptycatalog){
-        cout<<"Catalog is Empty"<<endl;
+        cout<<"Catalog is Empty"<<endl; //catalog empty
     }
 }
 
@@ -290,10 +290,10 @@ void Catalog::addToCart(string category, string name)
 
         while(tmp != NULL){
 
-            if(tmp->name == name){
+            if(tmp->name == name){ //adds the found item to cart
                 cout <<tmp->name<<" added to shopping cart"<<endl;
-                shoppingCart.push_back(tmp);
-                deleteItem(name,category);
+                shoppingCart.push_back(tmp); //added to cart
+                deleteItem(name,category); //removed from table
                 return;
             }
 
@@ -303,7 +303,7 @@ void Catalog::addToCart(string category, string name)
         }
     }
 
-    cout << "Item not found" << endl;
+    cout << "Item not found" << endl; //not found
 }
 
 void Catalog::removeFromCart(string name) //removing an item from the shopping cart
@@ -311,8 +311,8 @@ void Catalog::removeFromCart(string name) //removing an item from the shopping c
     for(int i = 0; i < shoppingCart.size(); i++){
 
         if(shoppingCart[i]->name == name){
-            insertItem(shoppingCart[i]->category,shoppingCart[i]->name, shoppingCart[i]->price);
-            shoppingCart.erase(shoppingCart.begin()+i);
+            insertItem(shoppingCart[i]->category,shoppingCart[i]->name, shoppingCart[i]->price); //added back to catalog
+            shoppingCart.erase(shoppingCart.begin()+i); //removed from vector
             return;
         }
 
@@ -327,17 +327,17 @@ int Catalog::checkOut(int budget) //checks out items, item by item. If there isn
         cout<<"Shopping Cart is Empty"<<endl;
     }
     else{
-        while(!shoppingCart.empty()){
+        while(!shoppingCart.empty()){ //keeps moveing through the shopping cart and continuously grabs the first (front) of the vector
             budget = budget - shoppingCart[0]->price;
-            if(budget < 0){
+            if(budget < 0){ //if over-goes budget
                 budget = budget + shoppingCart[0]->price;
                 cout<<"insufficient funds to purchase "<<shoppingCart[0]->name<<endl;
                 cout<<"you are being sent back to the buyer's menu"<<endl;
-                return budget;
+                return budget; //quits back out to main menu
             }
             else{
                 cout<<"Purchasing "<<shoppingCart[0]->name<<" for: "<<shoppingCart[0]->price<<endl;
-                shoppingCart.erase(shoppingCart.begin());
+                shoppingCart.erase(shoppingCart.begin()); //else removes from shopping cart and purchased
             }
 
         }
@@ -351,7 +351,7 @@ void Catalog::printShoppingCart() //iterates through the vector that makes up th
         cout<<"Shopping Cart is Empty"<<endl;
     }
     else{
-        for(int x = 0; x < shoppingCart.size();x++)
+        for(int x = 0; x < shoppingCart.size();x++) //goes through cart and print current inventory
         {
             cout<<"Item: "<<shoppingCart[x]->name<<", Price: "<<shoppingCart[x]->price<<endl;
 
