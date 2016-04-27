@@ -4,42 +4,41 @@ Prof. Rhonda Hoenigman
 TA: Amber Womack
 SID: 102359450*/
 
-#include "Catalog.h"
+#include "catalog.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
 
-    Catalog table = Catalog();
+    Catalog table = Catalog();//initializing Empty Catalog to be filled
 
     char *filename; //initializing catalog
 
-    /*Item Characteristics*/
+    /*Initializing Item Characteristics to read in for functions*/
     string itemName;
     string itemPriceString;
     string itemcategory;
     int itemPrice;
-
     string stringwallet;
     int wallet;
 
-    int numchoice1 = 0; //menu navigation variables
+    /*Menu Navigation Variables*/
+    int numchoice1 = 0;
     int numchoice2 = 0;
     string choice;
     bool buyerSeller;
 
-
+    /*Reading in Text File into the Hash Table*/
     if(argc > 1) {
         filename = argv[1];
     }
     else{
         filename = "items.txt";
     }
-
     table.readInItems(filename); //initialize catalog with items from items.txt
 
+    /*Displaying Navigation Menu for the User*/
     while(numchoice2 != 3) {  //first choice, buyer or seller?
-
         cout<<"Are you a buyer or a seller?"<<endl;
         cout<<"1. Buyer"<<endl;
         cout<<"2. Seller"<<endl;
@@ -48,31 +47,31 @@ int main(int argc, char* argv[]) {
         getline(cin,choice);
         numchoice1 = atoi(choice.c_str());
 
-        if(numchoice1 == 1){
+        if(numchoice1 == 1){ //User has chosen Buyer
             cout<<"Welcome buyer!"<<endl;
             buyerSeller = true; //BUYER
-            while(1){
+            while(1){ //Inputting Wallet Amount
                 cout<<"Please input the amount you are willing to spend (integer value)"<<endl;
                 getline(cin,stringwallet);
                 wallet = atoi(stringwallet.c_str());
                 if(wallet < 0 || wallet > 2147483648){
-                    cout<<"Cannot Have Negative $$$ or Value Greater than $2147483648"<<endl;
+                    cout<<"Cannot Have Negative $$$ or Value Exceeding 32 Bit Integers"<<endl;
                 }
                 else{
                     break;
                 }
             }
         }
-        else if(numchoice1 == 2){
+        else if(numchoice1 == 2){//User has chosen Seller
             buyerSeller = false; //SELLER
             cout<<"Welcome seller!"<<endl;
         }
-        else{
+        else{//User has Quit the Program
             cout<<"Good Bye!"<<endl;
             return 0;
         }
 
-        //BUYER'S MENU
+        /*BUYER'S MENU*/
         while(numchoice2 != 9 && buyerSeller == true) { //choices 1-7
             cout<<endl;
             cout<<"======Buyer's Main Menu======"<<endl;
@@ -132,7 +131,7 @@ int main(int argc, char* argv[]) {
                 wallet = table.checkOut(wallet);
             }
 
-            else if(numchoice2 == 9){ //quit
+            else if(numchoice2 == 9){ //quit to Buyer/Seller Menu
                 break;
             }
 
@@ -141,7 +140,7 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        //SELLER'S MENU
+        /*SELLER'S MENU*/
         while(numchoice2 != 5 && buyerSeller == false) { //choices 1-4
             cout<<endl;
             cout<<"======Seller's Main Menu======"<<endl;
@@ -155,11 +154,11 @@ int main(int argc, char* argv[]) {
             numchoice2 = atoi(choice.c_str()); //converting to int from string
 
             //choices 1-4
-            if(numchoice2 == 1) {
+            if(numchoice2 == 1) {//Print Entire Catalog
                 table.printCatalog();
             }
 
-            else if (numchoice2 == 2) {
+            else if (numchoice2 == 2) {//Insert an item to the hash table
                 cout<<"Insert Item Name."<<endl;
                 getline(cin, itemName);
                 cout<<"Insert Item Category."<<endl;
@@ -170,7 +169,7 @@ int main(int argc, char* argv[]) {
                 table.insertItem(itemcategory, itemName, itemPrice);
             }
 
-            else if (numchoice2 == 3) {
+            else if (numchoice2 == 3) {//Deleting an item from the hash table
                 cout<<"Insert Item Name."<<endl;
                 getline(cin, itemName);
                 cout<<"Insert Item Category."<<endl;
@@ -188,7 +187,7 @@ int main(int argc, char* argv[]) {
 
             }
 
-            else if (numchoice2 == 5) { //quit
+            else if (numchoice2 == 5) { //quit and return to Buyer/Seller Menu
                 break;
             }
 
@@ -196,11 +195,11 @@ int main(int argc, char* argv[]) {
                 cout<<"Not valid input"<<endl;
             }
         }
-        numchoice2 = 0;
+        numchoice2 = 0; //Resetting the Choices back to 0 so the User can select being a Buyer or Seller Again
         numchoice1 = 0;
 
     }
-    cout<<"Good Bye!"<<endl;
+    cout<<"Good Bye!"<<endl; //User input "3" in Buyer/Seller Menu and Program has ended
     return 0;
 
 }
