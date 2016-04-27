@@ -4,7 +4,7 @@ Prof. Rhonda Hoenigman
 TA: Amber Womack
 SID: 102359450*/
 
-#include "catalog.h"
+#include "Catalog.h"
 
 using namespace std;
 
