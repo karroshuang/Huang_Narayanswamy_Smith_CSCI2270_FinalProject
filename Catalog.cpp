@@ -62,9 +62,10 @@ void Catalog::printCatalogByPriceRange(int priceRange) //prints the same as the 
         cout<<"Catalog Empty"<<endl;
     }
     else
-    {
+    {  
         for(int x = 0; x < tableSize; x++)
         {
+            bool cantAfford = true;
             temp = itemCatalog[x];
             if(temp != NULL){
                 cout<<endl;
@@ -74,12 +75,12 @@ void Catalog::printCatalogByPriceRange(int priceRange) //prints the same as the 
                     if(temp->price < priceRange) //prints if under budget
                     {
                         cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
-                    }
-                    else{
-                        cout<<"Can't Afford Anything in this Category"<<endl; //all items are above price range
-                        break;
+                        cantAfford = false;
                     }
                     temp = temp->next;
+                }
+                if(cantAfford) {
+                    cout << "Can't afford anything in this category" << endl;
                 }
             }
         }
@@ -274,7 +275,9 @@ void Catalog::readInItems(char* filename) //initial function that puts things in
 
         insertItem(in_category,in_name,in_price);
     }
+    itemList.close();
 }
+
 void Catalog::addToCart(string category, string name)
 {
     int index = hashSum(category);//Acquiring index
@@ -332,8 +335,9 @@ int Catalog::checkOut(int budget) //checks out items, item by item. If there isn
             if(budget < 0){ //if over-goes budget
                 budget = budget + shoppingCart[0]->price;
                 cout<<"insufficient funds to purchase "<<shoppingCart[0]->name<<endl;
-                cout<<"you are being sent back to the buyer's menu"<<endl;
-                return budget; //quits back out to main menu
+                cout<<"this item is now being removed from your cart and will be placed back on the shelf"<<endl;
+                insertItem(shoppingCart[0]->category,shoppingCart[0]->name, shoppingCart[0]->price);
+                shoppingCart.erase(shoppingCart.begin());
             }
             else{
                 cout<<"Purchasing "<<shoppingCart[0]->name<<" for: "<<shoppingCart[0]->price<<endl;
