@@ -8,6 +8,23 @@ SID: 102359450*/
 
 using namespace std;
 
+
+//Tristan: Addition to buyer option. Allows for user to add money while they are still purchasing items in the catalog.
+//This allows for the user to edit their spending money without having to exit the program.
+int addtocurrentwallet(int wallet){
+    int walletaddition;
+    string addtowallet;
+    cout<< "How much money would you like to add to your budget?"<<endl;
+
+    getline(cin,addtowallet);
+    walletaddition = atoi(addtowallet.c_str());
+
+    wallet=wallet+walletaddition;
+
+    return wallet;
+
+}
+
 int main(int argc, char* argv[]) {
 
     Catalog table = Catalog();//initializing Empty Catalog to be filled
@@ -72,7 +89,7 @@ int main(int argc, char* argv[]) {
         }
 
         /*BUYER'S MENU*/
-        while(numchoice2 != 9 && buyerSeller == true) { //choices 1-7
+        while(numchoice2 != 10 && buyerSeller == true) { //choices 1-7
             cout<<endl;
             cout<<"======Buyer's Main Menu======"<<endl;
             cout<<"Current Wallet: $"<<wallet<<endl;
@@ -84,7 +101,8 @@ int main(int argc, char* argv[]) {
             cout<<"6. Remove item from shopping cart"<<endl;
             cout<<"7. Print shopping cart"<<endl;
             cout<<"8. Check out"<<endl;
-            cout<<"9. Quit"<<endl;
+            cout<<"9. Want to spend more money? Add more money to your budget here."<<endl;
+            cout<<"10. Quit"<<endl;
 
             getline(cin, choice); //getting choice
             numchoice2 = atoi(choice.c_str()); //converting to int from string
@@ -131,7 +149,11 @@ int main(int argc, char* argv[]) {
                 wallet = table.checkOut(wallet);
             }
 
-            else if(numchoice2 == 9){ //quit to Buyer/Seller Menu
+            else if(numchoice2 == 9){
+                wallet=addtocurrentwallet(wallet);
+            }
+
+            else if(numchoice2 == 10){ //quit to Buyer/Seller Menu
                 break;
             }
 

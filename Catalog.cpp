@@ -36,7 +36,7 @@ void Catalog::printCatalog() //prints the entire catalog, first by category and 
                 cout<<endl;
                 cout<<"Category"<<": "<<temp->category<<endl; //prints out the category name only once
                 while(temp != NULL){
-                    cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
+                    cout<<"Item:"<<temp->name<<", "<<"Price: $"<<temp->price<<endl; //Tristan: added '$'
                     temp = temp->next;
                 }
             }
@@ -62,7 +62,7 @@ void Catalog::printCatalogByPriceRange(int priceRange) //prints the same as the 
         cout<<"Catalog Empty"<<endl;
     }
     else
-    {  
+    {
         for(int x = 0; x < tableSize; x++)
         {
             bool cantAfford = true;
@@ -74,7 +74,7 @@ void Catalog::printCatalogByPriceRange(int priceRange) //prints the same as the 
                 {
                     if(temp->price < priceRange) //prints if under budget
                     {
-                        cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
+                        cout<<"Item:"<<temp->name<<", "<<"Price: $"<<temp->price<<endl; //Tristan: added '$'
                         cantAfford = false;
                     }
                     temp = temp->next;
@@ -172,7 +172,7 @@ void Catalog::findItem(string name, string category)
         item *tmp = itemCatalog[index]; //makes walker to move through table to find item
         while(tmp != NULL){
             if(tmp->name == name){
-                cout << "Item: "<< tmp->name << ", Category: "<< tmp->category << ", Price: "<<tmp->price<<endl;
+                cout << "Item: "<< tmp->name << ", Category: "<< tmp->category << ", Price: $"<<tmp->price<<endl; //Tristan: added '$
                 return;
             }
             else{
@@ -357,7 +357,7 @@ void Catalog::printShoppingCart() //iterates through the vector that makes up th
     else{
         for(int x = 0; x < shoppingCart.size();x++) //goes through cart and print current inventory
         {
-            cout<<"Item: "<<shoppingCart[x]->name<<", Price: "<<shoppingCart[x]->price<<endl;
+            cout<<"Item: "<<shoppingCart[x]->name<<", Price: $"<<shoppingCart[x]->price<<endl; //Tristan: added '$'
 
         }
     }
