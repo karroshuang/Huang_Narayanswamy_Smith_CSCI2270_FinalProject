@@ -36,7 +36,7 @@ class Catalog
 	public:
 		Catalog(); //construct
 		~Catalog(); //destruct
-		void readInItems(char *filname);
+		void readInItems(const char *filname);
 		void printCatalog();
 		void printCatalogByPriceRange(int priceRange);
 		void printCategories();
@@ -55,3 +55,4 @@ class Catalog
 };
 
 #endif // CATALOG_H
+
