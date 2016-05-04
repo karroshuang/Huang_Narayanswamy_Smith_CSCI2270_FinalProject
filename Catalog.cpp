@@ -17,6 +17,8 @@ Catalog::~Catalog()
 
 void Catalog::printCatalog() //prints the entire catalog, first by category and then each item in the category
 {
+	char blue[] = { 0x1b, '[', '1', ';', '3', '4', 'm', 0 }; //changes case number to blue
+    char normal[] = { 0x1b, '[', '0', ';', '3', '9', 'm', 0 }; //changes text back to white
     int counter=0; //makes sure there are more than 0 items in catalog
     item *temp = new item;
     for(int x = 0; x < tableSize; x++){ //checks to see if the array is empty
@@ -34,7 +36,7 @@ void Catalog::printCatalog() //prints the entire catalog, first by category and 
             temp = itemCatalog[x];
             if(temp != NULL){
                 cout<<endl;
-                cout<<"Category"<<": "<<temp->category<<endl; //prints out the category name only once
+                cout<<blue<<"Category"<<": "<<temp->category<<normal<<endl; //prints out the category name only once
                 while(temp != NULL){
                     cout<<"Item:"<<temp->name<<", "<<"Price:"<<temp->price<<endl;
                     temp = temp->next;
@@ -46,6 +48,8 @@ void Catalog::printCatalog() //prints the entire catalog, first by category and 
 
 void Catalog::printCatalogByPriceRange(int priceRange) //prints the same as the printFunction but by price
 {
+	char blue[] = { 0x1b, '[', '1', ';', '3', '4', 'm', 0 }; //changes case number to blue
+    char normal[] = { 0x1b, '[', '0', ';', '3', '9', 'm', 0 }; //changes text back to white
     int counter=0;
     item *temp = new item;
     for(int x = 0; x < tableSize; x++)
@@ -69,7 +73,7 @@ void Catalog::printCatalogByPriceRange(int priceRange) //prints the same as the 
             temp = itemCatalog[x];
             if(temp != NULL){
                 cout<<endl;
-                cout<<"Category"<<": "<<temp->category<<endl;
+                cout<<blue<<"Category"<<": "<<temp->category<<normal<<endl;
                 while(temp != NULL)
                 {
                     if(temp->price < priceRange) //prints if under budget
@@ -224,12 +228,16 @@ int Catalog::hashSum(string x) //basic hashSum function that separates things by
 
 void Catalog::printCategories() //prints the categories
 {
+	char blue[] = { 0x1b, '[', '1', ';', '3', '4', 'm', 0 }; //changes case number to blue
+    char normal[] = { 0x1b, '[', '0', ';', '3', '9', 'm', 0 }; //changes text back to white
     bool emptycatalog = true;
+    cout<<" "<<endl;
+    cout<<"Categories:"<<endl;
     for(int x=0; x < tableSize; x++) //iterates through the hashtable
     {
         if(itemCatalog[x] != NULL){
             emptycatalog = false;
-            cout<<itemCatalog[x]->category<<endl;
+            cout<<blue<<itemCatalog[x]->category<<normal<<endl;
         }
     }
     if(emptycatalog){
@@ -237,7 +245,7 @@ void Catalog::printCategories() //prints the categories
     }
 }
 
-void Catalog::readInItems(char* filename) //initial function that puts things in the array so the buyer or seller has something to wprk with
+void Catalog::readInItems(const char* filename) //initial function that puts things in the array so the buyer or seller has something to wprk with
 {
     string data; //used for string stream
     ifstream itemList; //text file stream
