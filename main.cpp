@@ -1,18 +1,12 @@
-/*Karros Huang, Girish Narayanswamy, Chase Smith
-CSCI 2270- Assignment 12
-Prof. Rhonda Hoenigman
-TA: Amber Womack
-SID: 102359450*/
-
 #include "Catalog.h"
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int main(int argc, const char * argv[]) {
 
     Catalog table = Catalog();//initializing Empty Catalog to be filled
 
-    char *filename; //initializing catalog
+    const char * filename; //initializing catalog
 
     /*Initializing Item Characteristics to read in for functions*/
     string itemName;
@@ -203,5 +197,4 @@ int main(int argc, char* argv[]) {
     return 0;
 
 }
-
 
